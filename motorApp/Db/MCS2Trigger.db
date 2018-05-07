@@ -1,0 +1,48 @@
+record(mbbo,"$(P)$(M)TrigMode"){
+	field(DTYP,asynInt32)
+	field(OUT,"@asyn($(PORT),$(ADDR),10)MCS2_TRIG_MODE")
+	field(ZRST,"CONSTANT")
+	field(ONST,"POSITION COMPARE")
+	field(TWST,"TARGET REACHED")
+	field(THST,"ACTIVELY MOVING")
+	field(ZRVL,"0")
+	field(ONVL,"1")
+	field(TWVL,"2")
+	field(THVL,"3")
+}
+
+record(mbbo,"$(P)$(M)TrigAP"){
+	field(DTYP,asynInt32)
+	field(OUT,"@asyn($(PORT),$(ADDR),10)MCS2_TRIG_AP")
+	field(ZRST,"LOW")
+	field(ONST,"HIGH")
+	field(ZRVL,"0")
+	field(ONVL,"1")
+}
+
+record(ao,"$(P)$(M)TrigPW"){
+	field(DTYP,asynFloat64)
+	field(OUT,"@asyn($(PORT),$(ADDR),10)MCS2_TRIG_PW")
+	field(EGU,"ms")
+}
+record(ao,"$(P)$(M)TrigInc"){
+	field(DTYP,asynFloat64)
+	field(OUT,"@asyn($(PORT),$(ADDR),10)MCS2_TRIG_INC")
+	field(EGU,"mm")
+}
+record(ao,"$(P)$(M)TrigThres"){
+	field(DTYP,asynFloat64)
+	field(OUT,"@asyn($(PORT),$(ADDR),10)MCS2_TRIG_THRES")
+	field(EGU,"mm")
+}
+record(mbbo,"$(P)$(M)TrigDir"){
+	field(DTYP,asynInt32)
+	field(OUT,"@asyn($(PORT),$(ADDR),10)MCS2_TRIG_DIR")
+	field(ZRST,"FORWARD")
+	field(ONST,"REVERSE")
+	field(TWST,"BIDIRECTIONAL")
+	field(ZRVL,"0")
+	field(ONVL,"1")
+	field(TWVL,"2")
+
+}
