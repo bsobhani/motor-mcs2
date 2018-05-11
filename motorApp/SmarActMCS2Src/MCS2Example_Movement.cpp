@@ -40,10 +40,6 @@ void exitOnError(SA_CTL_Result_t result) {
     }
 }
 
-void printccc(){
-	printf("CCC\n");
-}
-
 void printMenu(void) {
     printf("\n*******************************************************\n");
     printf("WARNING: make sure the positioner can move freely\n \

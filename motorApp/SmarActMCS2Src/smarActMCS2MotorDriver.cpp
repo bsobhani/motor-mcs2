@@ -65,7 +65,14 @@ SmarActMCS2Exception::SmarActMCS2Exception(SmarActMCS2ExceptionType t, const cha
 
 int initmcs();
 
-SmarActMCS2Controller::SmarActMCS2Controller(const char *portName, const char *IOPortName, int numAxes, double movingPollPeriod, double idlePollPeriod)
+/** Creates a new SmarActMCS2Controller object.
+  * \param[in] portName          The name of the asyn port that will be created for this driver
+  * \param[in] IPAddress         The controller's ip address
+  * \param[in] IPPort            TCP/IP port used to communicate with the controller 
+  * \param[in] movingPollPeriod  The time between polls when any axis is moving 
+  * \param[in] idlePollPeriod    The time between polls when no axis is moving 
+  */
+SmarActMCS2Controller::SmarActMCS2Controller(const char *portName, const char *IPAddress, int IPPort, int numAxes, double movingPollPeriod, double idlePollPeriod)
 	: asynMotorController(portName, numAxes,
 	                      0, // parameters
 	                      0, // interface mask
@@ -78,7 +85,7 @@ SmarActMCS2Controller::SmarActMCS2Controller(const char *portName, const char *I
 
 	if(initmcs()!=0){	
 	}
-	startPoller(.5,.5,0);
+	startPoller(movingPollPeriod,idlePollPeriod,0);
 
 }
 
@@ -145,20 +152,18 @@ SmarActMCS2Axis::SmarActMCS2Axis(class SmarActMCS2Controller *cnt_p, int axis, i
 
 /* iocsh wrapping and registration business (stolen from ACRMotorDriver.cpp) */
 static const iocshArg cc_a0 = {"Port name [string]",               iocshArgString};
-static const iocshArg cc_a1 = {"I/O port name [string]",           iocshArgString};
-static const iocshArg cc_a2 = {"Number of axes [int]",             iocshArgInt};
-static const iocshArg cc_a3 = {"Moving poll period (s) [double]",  iocshArgDouble};
-static const iocshArg cc_a4 = {"Idle poll period (s) [double]",    iocshArgDouble};
+static const iocshArg cc_a1 = {"IP Address [string]",               iocshArgString};
+static const iocshArg cc_a2 = {"IP port [int]",               iocshArgInt};
+//static const iocshArg cc_a1 = {"I/O port name [string]",           iocshArgString};
+static const iocshArg cc_a3 = {"Number of axes [int]",             iocshArgInt};
+static const iocshArg cc_a4 = {"Moving poll period (s) [double]",  iocshArgDouble};
+static const iocshArg cc_a5 = {"Idle poll period (s) [double]",    iocshArgDouble};
 
-static const iocshArg * const cc_as[] = {&cc_a0, &cc_a1, &cc_a2, &cc_a3, &cc_a4};
+static const iocshArg * const cc_as[] = {&cc_a0, &cc_a1, &cc_a2, &cc_a3, &cc_a4, &cc_a5};
 
 static const iocshFuncDef cc_def = {"smarActMCS2CreateController", sizeof(cc_as)/sizeof(cc_as[0]), cc_as};
 
 
-
-void printddd(){
-	printf("DDD");
-}
 
 asynStatus do_a_move(int64_t distance, int64_t velocity, int channel);
 void set_accel(int64_t accel, int channel);
@@ -188,13 +193,15 @@ SmarActMCS2Axis::home(double min_vel, double max_vel, double accel, int forwards
 extern "C" void *
 smarActMCS2CreateController(
 	const char *motorPortName,
-	const char *ioPortName,
+	//const char *ioPortName,
+	const char *ipAddress,
+	int ipPort,
 	int         numAxes,
 	double      movingPollPeriod,
 	double      idlePollPeriod)
 {
 	
-	return new SmarActMCS2Controller(motorPortName,ioPortName,numAxes,movingPollPeriod,idlePollPeriod);
+	return new SmarActMCS2Controller(motorPortName,ipAddress,ipPort,numAxes,movingPollPeriod,idlePollPeriod);
 	//return 0;
 }
 
@@ -204,8 +211,9 @@ static void cc_fn(const iocshArgBuf *args)
 		args[0].sval,
 		args[1].sval,
 		args[2].ival,
-		args[3].dval,
-		args[4].dval);
+		args[3].ival,
+		args[4].dval,
+		args[5].dval);
 }
 
 
