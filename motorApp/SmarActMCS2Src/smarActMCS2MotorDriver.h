@@ -40,8 +40,6 @@ protected:
 	SmarActMCS2ExceptionType t_;
 };
 
-//void printddd();
-void printccc();
 class SmarActMCS2Axis : public asynMotorAxis
 {
 public:
@@ -61,7 +59,7 @@ private:
 class SmarActMCS2Controller : public asynMotorController
 {
 public:
-	SmarActMCS2Controller(const char *portName, const char *IOPortName, int numAxes, double movingPollPeriod, double idlePollPeriod);
+	SmarActMCS2Controller(const char *portName, const char *ipAddress, int ipPort, int numAxes, double movingPollPeriod, double idlePollPeriod);
 	//virtual asynStatus writeFloat64(asynUser *pasynUser, epicsFloat64 value);
 	//int64_t motorEncoderPosition_;
 	//int64_t motorPosition_;

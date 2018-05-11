@@ -146,14 +146,17 @@ int set_trig_active_polarity(int channel, int ap){
 
 int initialized=0;
 
-int initmcs(){
+int initmcs(const char* IPAddress, int IPPort){
     if(initialized==1){
         SA_CTL_Close(dHandle);
     }
     SA_CTL_Result_t result;
 
     const char *version = SA_CTL_GetFullVersionString();
-    char *locator = "network:192.168.1.200:55550";
+    //char *locator = "network:192.168.1.200:55550";
+    //char *locator = "network:192.168.1.200:55550";
+    char locator[500];
+    sprintf(locator,"network:%s:%d",IPAddress,IPPort);
     
     result = SA_CTL_Open(&dHandle, locator, "");
     if (result != SA_CTL_ERROR_NONE) {

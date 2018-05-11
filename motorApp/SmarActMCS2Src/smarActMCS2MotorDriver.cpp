@@ -63,7 +63,7 @@ SmarActMCS2Exception::SmarActMCS2Exception(SmarActMCS2ExceptionType t, const cha
 	epicsVsnprintf(str_, sizeof(str_), fmt, ap);
 }
 
-int initmcs();
+int initmcs(const char *IPAddress, int IPPort);
 
 /** Creates a new SmarActMCS2Controller object.
   * \param[in] portName          The name of the asyn port that will be created for this driver
@@ -83,7 +83,7 @@ SmarActMCS2Controller::SmarActMCS2Controller(const char *portName, const char *I
 	
 {
 
-	if(initmcs()!=0){	
+	if(initmcs(IPAddress, IPPort)!=0){	
 	}
 	startPoller(movingPollPeriod,idlePollPeriod,0);
 
