@@ -1,6 +1,13 @@
 # motor-mcs2
 Motor Record Support for SmarAct MCS2 Controller
 
+Notes
+-------
+* In order for the IOC to work, it needs the MCS2 version of the motor record: https://github.com/bsobhani/motor-mcs2
+* The SmarAct MCS2 SDK needs to be installed (compatible with both Windows and Linux)
+* An ascii version is under development but needs further testing
+* Questions or comments: bsobhani@bnl.gov, 631-344-7587
+
 License
 -------
 
