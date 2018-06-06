@@ -5,7 +5,7 @@ Notes
 -------
 * The SmarAct MCS2 SDK needs to be installed (compatible with both Windows and Linux)
 * An ascii version is under development but needs further testing
-* Questions or comments: bsobhani@bnl.gov, 631-344-7587
+* Questions or comments: bsobhani at bnl dot gov, 631-344-7587
 
 License
 -------
