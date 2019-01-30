@@ -258,7 +258,7 @@ int main1() {
     char *ptr;
     strtok_r(deviceList, "\n",&ptr);*/
     //char *locator = deviceList; 
-    char *locator = "network:192.168.1.200:55550";
+    const char *locator = "network:192.168.1.200:55550";
     result = SA_CTL_Open(&dHandle, locator, "");
     if (result != SA_CTL_ERROR_NONE) {
         printf("MCS2 failed to open \"%s\".\n",locator);

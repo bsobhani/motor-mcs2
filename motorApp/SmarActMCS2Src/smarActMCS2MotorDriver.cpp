@@ -55,7 +55,7 @@ va_list ap;
 	} else {
 		str_[0] = 0;
 	}
-};
+}
 
 SmarActMCS2Exception::SmarActMCS2Exception(SmarActMCS2ExceptionType t, const char *fmt, va_list ap)
 		: t_(t)

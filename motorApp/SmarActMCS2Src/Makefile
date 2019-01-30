@@ -18,6 +18,7 @@ DBD += devSmarActMCS2Motor.dbd
 INC += smarActMCS2MotorDriver.h
 INC += smarActMCS2TriggerDriver.h
 
+USR_CXXFLAGS += -std=c++0x
 smarActMCS2Motor_CXXFLAGS += -w
 
 # The following are compiled and added to the Support library
