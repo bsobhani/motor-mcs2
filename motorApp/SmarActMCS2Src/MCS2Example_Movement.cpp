@@ -458,13 +458,13 @@ void move_r(int8_t channel, int32_t moveMode, int8_t direction, int64_t distance
     // Set move mode depending properties for the next movement. 
     switch (moveMode) {
         case SA_CTL_MOVE_MODE_CL_ABSOLUTE:
-	    SA_CTL_SetProperty_i32(dHandle, channel, SA_CTL_PKEY_MOVE_MODE, moveMode);
+            result = SA_CTL_SetProperty_i32(dHandle, channel, SA_CTL_PKEY_MOVE_MODE, moveMode);
             // Set move velocity [in pm/s].
             //result = SA_CTL_SetProperty_i64(dHandle, channel, SA_CTL_PKEY_MOVE_VELOCITY, 1000000000);
             exitOnError(result);
             // Set move acceleration [in pm/s2].
             //result = SA_CTL_SetProperty_i64(dHandle, channel, SA_CTL_PKEY_MOVE_ACCELERATION, 1000000000);
-            exitOnError(result);
+            //exitOnError(result);
             // Specify absolute position [in pm].
             if (direction) moveValue = -2000000000;
             else moveValue = 1000000000;
